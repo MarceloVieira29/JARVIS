@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>JARVIS</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-modo="">
+<header class="topo">
+  <div class="marca">
+    <svg class="logo" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18"/><circle cx="20" cy="20" r="11"/><path d="M20 9v22M9 20h22"/><circle cx="20" cy="20" r="4" class="cheio"/></svg>
+    <div><h1>JARVIS</h1><small>Just A Rather Very Intelligent System</small></div>
+  </div>
+  <div class="meta">
+    <div><small>Status do sistema</small><b id="sys"><i class="led"></i><span>INICIANDO</span></b></div>
+    <div><small>Hora local</small><b id="hora">--:--:--</b></div>
+  </div>
+  <div class="acoes">
+    <button id="abrirCfg" class="ico" title="Configurações" aria-label="Configurações"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/></svg></button>
+    <span class="usuario"><span id="usuario">SENHOR</span><i></i></span>
+  </div>
+</header>
+
+<main class="hud">
+  <section class="col">
+    <article class="pn" id="pn-clima">
+      <header><span>Sistema //<b>Clima</b></span><small id="cl-cidade">—</small></header>
+      <div class="grande"><b id="cl-temp">--</b><span>°C</span></div>
+      <p id="cl-desc" class="mut">Carregando…</p>
+      <div class="dias" id="cl-dias"></div>
+    </article>
+    <article class="pn" id="pn-mercado">
+      <header><span>Sistema //<b>Mercado</b></span><small id="mk-titulo">BTC/BRL · 24H</small></header>
+      <div class="linha-dupla"><b id="mk-preco">--</b><span id="mk-var" class="var">--</span></div>
+      <div class="periodos" id="mk-periodos"><button data-p="1H">1H</button><button data-p="24H">24H</button><button data-p="7D">7D</button><button data-p="30D">30D</button></div>
+      <svg id="mk-velas" class="velas" viewBox="0 0 300 100" preserveAspectRatio="none" aria-label="Gráfico de velas"></svg>
+      <div class="faixa"><span id="mk-min">mín --</span><span id="mk-max">máx --</span></div>
+      <div class="ativos" id="mk-ativos">
+        <button data-par="BTCBRL"><span>BTC/BRL</span><b id="mk-BTCBRL">--</b><i id="mk-BTCBRL-var" class="var">--</i></button>
+        <button data-par="BTCUSDT"><span>BTC/USDT</span><b id="mk-BTCUSDT">--</b><i id="mk-BTCUSDT-var" class="var">--</i></button>
+        <button data-par="ETHBRL"><span>ETH/BRL</span><b id="mk-ETHBRL">--</b><i id="mk-ETHBRL-var" class="var">--</i></button>
+        <button data-par="USDTBRL"><span>USDT/BRL</span><b id="mk-USDTBRL">--</b><i id="mk-USDTBRL-var" class="var">--</i></button>
+      </div>
+    </article>
+    <article class="pn" id="pn-agenda">
+      <header><span>Sistema //<b>Agenda</b></span><small id="ag-resumo">—</small></header>
+      <ul id="ag-lista" class="lista"></ul>
+    </article>
+  </section>
+
+  <section class="pn centro">
+    <div class="leituras">
+      <div class="leitura" id="lt-temp"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="42" class="trilho"/><circle cx="50" cy="50" r="42" class="valor" pathLength="100"/><circle cx="50" cy="50" r="34" class="interno"/></svg><b>--</b><small>Temp °C</small></div>
+      <div class="leitura" id="lt-chuva"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="42" class="trilho"/><circle cx="50" cy="50" r="42" class="valor" pathLength="100"/><circle cx="50" cy="50" r="34" class="interno"/></svg><b>--</b><small>Chuva</small></div>
+      <div class="leitura" id="lt-btc"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="42" class="trilho"/><circle cx="50" cy="50" r="42" class="valor" pathLength="100"/><circle cx="50" cy="50" r="34" class="interno"/></svg><b>--</b><small>BTC 24h</small></div>
+      <div class="leitura" id="lt-mod"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="42" class="trilho"/><circle cx="50" cy="50" r="42" class="valor" pathLength="100"/><circle cx="50" cy="50" r="34" class="interno"/></svg><b>--</b><small>Módulos</small></div>
+    </div>
+    <button id="orb" class="reator" aria-label="Ativar o JARVIS">
+      <svg viewBox="0 0 300 300" aria-hidden="true">
+        <defs><path id="trilha-txt" d="M150 150m-88 0a88 88 0 1 1 176 0a88 88 0 1 1-176 0"/></defs>
+        <g id="escala" class="escala"></g>
+        <circle cx="150" cy="150" r="142" class="fino"/>
+        <circle cx="150" cy="150" r="136" class="segmentos g-reverso-lento"/>
+        <circle cx="150" cy="150" r="128" class="tracejado g-lento"/>
+        <g class="g-orbita"><circle cx="150" cy="22" r="3" class="ponto"/></g>
+        <g class="g-rapido"><circle cx="150" cy="150" r="114" class="arco"/></g>
+        <g class="g-reverso"><circle cx="150" cy="150" r="102" class="arco2"/></g>
+        <g class="raios"><path d="M150 8v70M150 222v70M27 79l62 36M211 185l62 36M27 221l62-36M211 115l62-36"/></g>
+        <g class="g-texto"><text class="anel-txt"><textPath href="#trilha-txt">J.A.R.V.I.S · NÚCLEO PRINCIPAL · SISTEMAS EM LINHA · VOZ · CLIMA · MERCADO · BÍBLIA ·</textPath></text></g>
+        <circle cx="150" cy="150" r="72" class="forte"/>
+        <g id="escala-interna" class="escala"></g>
+        <circle cx="150" cy="150" r="46" class="nucleo"/>
+      </svg>
+      <span class="core" id="core">ATIVAR</span>
+    </button>
+    <div class="onda" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="pilula"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg><span id="st">Toque no núcleo para ativar</span></div>
+    <nav class="dock" aria-label="Atalhos">
+      <button data-cmd="bom dia" title="Briefing do dia"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2"/></svg><span>Briefing</span></button>
+      <button data-cmd="previsão do tempo" title="Previsão do tempo"><svg viewBox="0 0 24 24"><path d="M7 18h10a4 4 0 0 0 0-8 6 6 0 0 0-11.5 1.5A3.3 3.3 0 0 0 7 18z"/></svg><span>Clima</span></button>
+      <button data-cmd="cotação do bitcoin" title="Cotação do bitcoin"><svg viewBox="0 0 24 24"><path d="M3 20h18M5 16l4-5 4 3 6-8"/><path d="M15 6h4v4"/></svg><span>Mercado</span></button>
+      <button data-cmd="versículo do dia" title="Versículo do dia"><svg viewBox="0 0 24 24"><path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z"/><path d="M12 8v6M9.5 10.5h5"/></svg><span>Bíblia</span></button>
+      <button data-cmd="pendências" title="Pendências"><svg viewBox="0 0 24 24"><path d="M9 6h11M9 12h11M9 18h11"/><path d="M4 6l1 1 2-2M4 12l1 1 2-2M4 18l1 1 2-2"/></svg><span>Tarefas</span></button>
+      <button data-cmd="lembretes" title="Lembretes"><svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M5 3l3 2M19 3l-3 2"/></svg><span>Lembretes</span></button>
+    </nav>
+  </section>
+
+  <section class="col">
+    <article class="pn" id="pn-sistema">
+      <header><span>Sistema //<b>Módulos</b></span><small id="sy-resumo">—</small></header>
+      <div class="medidor"><span>Módulos online</span><b id="sy-pct">--%</b></div>
+      <div class="barra"><i id="sy-barra"></i></div>
+      <div class="modulos" id="sy-modulos"></div>
+    </article>
+    <article class="pn" id="pn-versiculo">
+      <header><span>Sistema //<b>Versículo do dia</b></span><small id="vs-ref">—</small></header>
+      <p id="vs-texto" class="citacao">Carregando…</p>
+    </article>
+    <article class="pn terminal">
+      <header><span>Sistema //<b>Terminal</b></span><small>root@jarvis</small></header>
+      <div id="log"></div>
+      <div class="entrada"><span>&gt;</span><input id="t" placeholder="digite um comando…" autocomplete="off"><button id="send">Enviar</button></div>
+    </article>
+  </section>
+</main>
+
+<dialog id="ajustes">
+  <form method="dialog" class="pn">
+    <header><span>Sistema //<b>Configurações</b></span><button class="ico" value="fechar" aria-label="Fechar">✕</button></header>
+    <label>Seu nome<input id="nm" placeholder="Como devo chamá-lo"></label>
+    <label>URL do backend de IA<input id="bk" placeholder="https://..."></label>
+    <label>Código de acesso (só nesta sessão)<input id="ac" type="password"></label>
+    <label>Voz<span class="row"><select id="vz"></select><button type="button" id="vt">▶ Testar</button></span></label>
+    <label class="check"><input type="checkbox" id="wk"> exigir a palavra-chave antes dos comandos</label>
+    <button type="button" id="cfg" class="primario">Salvar</button>
+  </form>
+</dialog>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>

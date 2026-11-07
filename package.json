@@ -1,0 +1,16 @@
+{
+  "name": "jarvis",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Assistente de voz em português com skills plugáveis e backend opcional de IA (Cloudflare Worker).",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "node scripts/serve.mjs",
+    "test": "node --test tests/",
+    "worker": "npx --yes wrangler@3 dev --config worker/wrangler.toml --port 8787",
+    "worker:deploy": "npx --yes wrangler@3 deploy --config worker/wrangler.toml"
+  }
+}

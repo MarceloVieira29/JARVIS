@@ -1,0 +1,9 @@
+_legado/
+node_modules/
+.wrangler/
+worker/.dev.vars
+*.zip
+*.pdf
+*.log
+.DS_Store
+Thumbs.db

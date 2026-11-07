@@ -1,0 +1,23 @@
+---
+description: Comandos falados do Marcelo para rodar o JARVIS local e publicar na main
+alwaysApply: true
+---
+
+# Comandos do JARVIS
+
+## "pode rodar jarvis local" (ou "rodar local")
+1. Rode em segundo plano (o servidor não termina sozinho):
+   `powershell -ExecutionPolicy Bypass -File scripts/local.ps1`
+2. Espere aparecer `JARVIS local em http://localhost:8000`. Se os testes falharem, mostre a falha e pare.
+3. Responda com o endereço e se o Worker de IA subiu (só sobe se existir `worker/.dev.vars`).
+4. Não commite nada.
+
+## "pode rodar jarvis main"
+1. Veja `git status` e `git diff --stat` e escreva uma mensagem de commit curta em português descrevendo o que mudou (ex.: `skills: adiciona clima`).
+2. Rode: `powershell -ExecutionPolicy Bypass -File scripts/main.ps1 -Mensagem "<mensagem>"`
+3. O script testa, commita tudo e faz push em `origin/main`. Se os testes falharem, nada é commitado: mostre a falha.
+4. Responda com o hash do commit e o link da publicação: https://marcelovieira29.github.io/JARVIS/
+
+## Sempre
+- Nunca commite `worker/.dev.vars`, chaves, tokens, PDFs ou `_legado/`.
+- Skill nova: arquivo em `web/js/skills/`, nome em `skills` no `web/js/config.js` antes de `'ia'`, e um caso em `tests/rotas.test.mjs`.

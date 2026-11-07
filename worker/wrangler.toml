@@ -1,0 +1,11 @@
+name = "jarvis-ia"
+main = "src/index.mjs"
+compatibility_date = "2025-01-01"
+
+# Segredos (nunca neste arquivo):
+#   npx wrangler secret put ANTHROPIC_API_KEY --config worker/wrangler.toml
+#   npx wrangler secret put ACCESS_CODE --config worker/wrangler.toml
+# Em desenvolvimento eles vêm de worker/.dev.vars (veja .dev.vars.example).
+
+[vars]
+ALLOWED_ORIGIN = "https://marcelovieira29.github.io"

@@ -1,0 +1,8 @@
+// Open-Meteo (grátis, sem chave): busca de cidade e previsão de 3 dias. Usado pela skill clima e pelo painel.
+const WMO={0:'céu limpo',1:'predominantemente limpo',2:'parcialmente nublado',3:'nublado',45:'nevoeiro',48:'nevoeiro com geada',51:'garoa fraca',53:'garoa',55:'garoa forte',56:'garoa congelante',57:'garoa congelante',61:'chuva fraca',63:'chuva moderada',65:'chuva forte',66:'chuva congelante',67:'chuva congelante',71:'neve fraca',73:'neve',75:'neve forte',77:'grãos de neve',80:'pancadas de chuva fracas',81:'pancadas de chuva',82:'pancadas de chuva fortes',85:'pancadas de neve',86:'pancadas de neve fortes',95:'trovoadas',96:'trovoadas com granizo',99:'trovoadas com granizo'};
+export const descrever=c=>WMO[c]??'tempo indefinido';
+const get=u=>fetch(u).then(r=>{if(!r.ok)throw new Error('HTTP '+r.status);return r.json()});
+export async function geocodificar(nome){const j=await get('https://geocoding-api.open-meteo.com/v1/search?count=5&language=pt&format=json&name='+encodeURIComponent(nome));
+const l=j.results||[],x=l.find(r=>r.country_code==='BR')||l[0];return x&&{nome:x.name,lat:x.latitude,lon:x.longitude}}
+export const aqui=()=>new Promise(ok=>{if(!globalThis.navigator?.geolocation)return ok(null);navigator.geolocation.getCurrentPosition(p=>ok({nome:'sua região',lat:p.coords.latitude,lon:p.coords.longitude}),()=>ok(null),{timeout:8000,maximumAge:36e5})});
+export const previsao=l=>get(`https://api.open-meteo.com/v1/forecast?latitude=${l.lat}&longitude=${l.lon}&current=temperature_2m,apparent_temperature,weather_code&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=auto&forecast_days=3`);
