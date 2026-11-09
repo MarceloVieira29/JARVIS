@@ -83,6 +83,7 @@
       <button data-cmd="versículo do dia" title="Versículo do dia"><svg viewBox="0 0 24 24"><path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z"/><path d="M12 8v6M9.5 10.5h5"/></svg><span>Bíblia</span></button>
       <button data-cmd="pendências" title="Pendências"><svg viewBox="0 0 24 24"><path d="M9 6h11M9 12h11M9 18h11"/><path d="M4 6l1 1 2-2M4 12l1 1 2-2M4 18l1 1 2-2"/></svg><span>Tarefas</span></button>
       <button data-cmd="lembretes" title="Lembretes"><svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M5 3l3 2M19 3l-3 2"/></svg><span>Lembretes</span></button>
+      <button data-abrir="harmonia" title="Harmonia — playlist da semana"><svg viewBox="0 0 24 24"><path d="M9 18V5l11-2v13"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="17.5" cy="16" r="2.5"/></svg><span>Harmonia</span></button>
     </nav>
   </section>
 
@@ -115,6 +116,19 @@
     <label class="check"><input type="checkbox" id="wk"> exigir a palavra-chave antes dos comandos</label>
     <button type="button" id="cfg" class="primario">Salvar</button>
   </form>
+</dialog>
+
+<dialog id="harmonia" class="hm">
+  <div class="pn">
+    <header><span>Sistema //<b>Harmonia</b></span><small id="hm-edicao"></small><button type="button" class="ico" id="hm-fechar" aria-label="Fechar">✕</button></header>
+    <p class="hm-sub">Mente, corpo e espírito · playlist da semana</p>
+    <nav class="hm-abas" id="hm-abas"></nav>
+    <div class="hm-servico" id="hm-servico"></div>
+    <p class="mut" id="hm-momento"></p>
+    <ul class="hm-faixas" id="hm-faixas"></ul>
+    <p class="hm-nota" id="hm-nota"></p>
+    <footer class="hm-rodape"><span>Versículo da semana · <b id="hm-vers"></b></span><button type="button" id="hm-ler">Ler</button></footer>
+  </div>
 </dialog>
 
 <script type="module" src="js/main.js"></script>

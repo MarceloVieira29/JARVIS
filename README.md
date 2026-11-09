@@ -11,6 +11,7 @@ web/                       site estático (é o que vai para o GitHub Pages)
   index.html, css/         tela HUD: núcleo central, painéis e terminal
   js/main.js               liga a interface ao núcleo, à voz e aos painéis
   js/ui/painel.js          painéis com dados reais (clima, mercado, agenda, módulos, versículo); só lê
+  js/ui/harmonia.js        janela da playlist da semana (abas por momento, links para ouvir)
   js/config.js             ÚNICO lugar para ligar/desligar skills, nome, palavras-chave, voz
   js/core/core.js          carrega as skills e roteia o comando para a primeira que "casa"
   js/core/voice.js         fala e escuta (não conhece skills nem backend)
@@ -77,6 +78,7 @@ npm run worker:deploy
 | `cotacao` | "cotação do ethereum", "quanto está o solana", "bitcoin" |
 | `clima` | "previsão do tempo", "vai chover amanhã em Curitiba", "clima nos próximos dias", "minha cidade é Campinas" |
 | `biblia` | "leia salmo 23", "João 3 16", "versículo do dia", "reflexão do dia", "reflexão sobre Filipenses 4 13", "estudo de Romanos 8", "estudo bíblico sobre perdão" |
+| `harmonia` | "playlist da semana", "música para dormir", "música para análise de bitcoin", "música de adoração", "música 432 hz" |
 | `ia` | todo o resto (precisa do Worker); fica sempre por último |
 
 Lembretes e alertas só disparam com a aba aberta.
@@ -84,6 +86,8 @@ Lembretes e alertas só disparam com a aba aberta.
 `clima` usa o Open-Meteo (sem chave). A cidade vem da frase; a primeira cidade pedida vira a padrão; sem cidade, usa a localização do navegador e, por fim, `cidadePadrao` do config.
 
 `biblia` lê a tradução Almeida pelo bible-api.com (sem chave); capítulos longos são lidos de 15 em 15 versículos. Reflexão e estudo mandam o texto ao Worker nos modos `reflexao` e `estudo`; sem Worker, o JARVIS lê a passagem e propõe um roteiro de meditação ou de estudo.
+
+`harmonia` é a playlist da semana em cinco momentos (fé, estudos, mercado, relaxamento, noite). A skill fala as faixas e abre a janela Harmonia (também no atalho do núcleo), com links para ouvir no Spotify ou YouTube e o versículo da semana. Edição nova: troque `EDICAO` em `web/js/lib/harmonia.js` — só títulos, artistas e links, nunca letras.
 
 ## Comando de voz
 

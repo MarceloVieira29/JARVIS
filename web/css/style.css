@@ -146,7 +146,7 @@ body[data-modo=falando] .onda i{animation-duration:.5s}
 .leitura.cai .valor{stroke:var(--erro);filter:drop-shadow(0 0 4px var(--erro))}.leitura.cai b{color:var(--erro)}
 
 /* atalhos */
-.dock{display:grid;grid-template-columns:repeat(3,74px);gap:8px} /* 2 fileiras: cabe entre os medidores dos cantos */
+.dock{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;width:238px} /* 3 por fileira: cabe entre os medidores dos cantos */
 .dock button{display:flex;flex-direction:column;align-items:center;gap:4px;width:74px;padding:9px 4px 7px;border:1px solid var(--linha);background:#020f18;color:var(--mut);clip-path:polygon(10px 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%,0 10px)}
 .dock button:hover{border-color:var(--a2);color:var(--a);background:#06202d}
 .dock svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.5}
@@ -187,7 +187,8 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;background:rep
 .entrada button:hover,.primario:hover,#vt:hover{background:#0a3446}
 
 /* configurações */
-dialog{border:0;padding:0;background:none;color:inherit;width:min(460px,92vw)}
+dialog{border:0;padding:0;background:none;color:inherit;width:min(460px,92vw);overflow:visible} /* as cantoneiras do .pn saem 1px da caixa */
+*{scrollbar-color:var(--linha-forte) transparent;scrollbar-width:thin}
 dialog::backdrop{background:#000a}
 dialog form{display:flex;flex-direction:column;gap:12px;background:#03101a}
 dialog label{display:flex;flex-direction:column;gap:4px;font:10px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--mut)}
@@ -195,6 +196,36 @@ dialog input,dialog select{padding:9px 10px;border:1px solid var(--linha-forte);
 dialog .row{display:flex;gap:8px}dialog .row select{flex:1;min-width:0}
 dialog .check{flex-direction:row;align-items:center;gap:8px;text-transform:none;letter-spacing:0;font-family:inherit;font-size:13px}
 dialog .check input{width:auto}
+
+/* harmonia */
+dialog.hm{width:min(620px,94vw)}
+.hm .pn{display:flex;flex-direction:column;gap:10px;background:#03101a;max-height:88vh;overflow:hidden auto}
+.hm .pn>header small{margin-left:auto}
+.hm-sub{margin:-6px 0 0;font:11px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--mut)}
+.hm-abas{display:flex;flex-wrap:wrap;gap:6px}
+.hm-abas button,#hm-ler{border:1px solid var(--linha);background:#020f18;color:var(--mut);padding:6px 10px;font:600 10px var(--mono);letter-spacing:.12em;text-transform:uppercase}
+.hm-abas button:hover,#hm-ler:hover{border-color:var(--a2);color:var(--a)}
+.hm-abas button.on{border-color:var(--a);color:var(--a);background:#06202d}
+#hm-momento{margin:0;font-size:13px}
+.hm-faixas{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.hm-faixas li{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:8px 10px;border:1px solid var(--linha);border-left:2px solid var(--a2);background:#010a10}
+.hm-faixas li span{display:flex;flex-direction:column;min-width:0}
+.hm-faixas b{color:var(--txt);font-weight:600}
+.hm-faixas small{font:11px var(--mono)}
+.hm-servico{display:flex;align-items:center;gap:6px;font:10px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--mut)}
+.hm-servico span{margin-right:4px}
+.hm-servico button{border:1px solid var(--linha);background:#020f18;color:var(--mut);padding:4px 10px;font:600 10px var(--mono);letter-spacing:.12em;text-transform:uppercase}
+.hm-servico button:hover{border-color:var(--a2);color:var(--a)}
+.hm-servico button.on{border-color:var(--a);color:var(--a);background:#06202d}
+.hm-links{display:flex;flex:none;gap:4px}
+.hm-faixas a{color:var(--mut);font:600 10px var(--mono);letter-spacing:.08em;text-transform:uppercase;text-decoration:none;border:1px solid var(--linha);padding:5px 7px;white-space:nowrap}
+.hm-faixas a:hover{color:var(--a);border-color:var(--a2);background:#06202d}
+.hm-faixas a.pref{color:var(--a);border-color:var(--a);background:#06202d}
+@media (max-width:560px){.hm-faixas li{flex-direction:column;align-items:stretch}.hm-links a{flex:1;text-align:center}}
+.hm-nota{margin:0;font-size:12px;color:var(--alerta)}
+.hm-nota:empty{display:none}
+.hm-rodape{display:flex;justify-content:space-between;align-items:center;gap:8px;padding-top:8px;border-top:1px solid var(--linha);font-size:13px}
+.hm-rodape b{color:var(--a)}
 
 /* telas menores: o núcleo vem primeiro */
 @media (max-width:1100px){

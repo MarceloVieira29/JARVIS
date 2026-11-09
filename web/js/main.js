@@ -4,6 +4,7 @@ import {state,save,code,setCode} from './core/store.js';
 import {carregarSkills,iniciarSkills,executar} from './core/core.js';
 import {falar,ouvir,parar,estaAtivo,suportaVoz,onEstado,listarVozes,setVoz,autorizarMicrofone} from './core/voice.js';
 import {iniciarPainel,atualizarPainel} from './ui/painel.js';
+import {abrirHarmonia} from './ui/harmonia.js';
 const $=id=>document.getElementById(id);
 let gesto=false;const fila=[];                       // navegadores só deixam falar após um toque do usuário
 const liberar=()=>{if(gesto)return;gesto=true;fila.splice(0).forEach(falar)};
@@ -12,7 +13,8 @@ const MODOS=[[/ouvindo/i,'ouvindo','OUVINDO'],[/falando/i,'falando','FALANDO'],[
 function status(s){$('st').textContent=s;const m=MODOS.find(([r])=>r.test(s));document.body.dataset.modo=m?m[1]:'';$('core').textContent=m?m[2]:estaAtivo()?'NÚCLEO\nATIVO':'ATIVAR'}
 const msg=(t,c)=>{const d=document.createElement('div');d.className='m '+c;d.textContent=t;$('log').append(d);$('log').scrollTop=1e9};
 const dizer=t=>{msg(t,'ai');gesto?falar(t):fila.push(t)};
-const ctx={estado:state,salvar:save,cfg,backend:()=>state.backend||cfg.backendUrl,codigo:code,dizer};
+const mostrar=(tela,id)=>{if(tela==='harmonia')abrirHarmonia(id,ctx,pedir)};
+const ctx={estado:state,salvar:save,cfg,backend:()=>state.backend||cfg.backendUrl,codigo:code,dizer,mostrar};
 const pronto=carregarSkills().then(()=>iniciarSkills(ctx));
 const re=new RegExp('\\b('+cfg.palavrasChave.join('|')+')\\b[,\\s]*(.*)','i');
 async function pedir(t){msg(t,'u');status('Pensando…');await pronto;dizer(await executar(t,ctx));atualizarPainel(ctx)}
@@ -33,7 +35,7 @@ $('orb').onclick=async()=>{if(estaAtivo())return parar();await pronto;
  if(!suportaVoz)return msg('Este navegador não reconhece voz. Use Chrome ou Edge, ou digite.','ai');
  if(!await autorizarMicrofone())return msg($('st').textContent,'ai');
  ouvir(tratar,t=>status('Ouvindo: '+t));atualizarPainel(ctx)};
-document.querySelectorAll('.dock button').forEach(b=>b.onclick=()=>pedir(b.dataset.cmd));
+document.querySelectorAll('.dock button').forEach(b=>b.onclick=()=>b.dataset.abrir?mostrar(b.dataset.abrir):pedir(b.dataset.cmd));
 const agora=()=>new Date().toLocaleTimeString('pt-BR');
 msg(`[${agora()}] Inicializando ${cfg.nome}…`,'sys');
 iniciarPainel(ctx).then(m=>{m.forEach(([n,[v,s]])=>msg(`[${agora()}] ${n.padEnd(10,'.')} ${v}${s?' ⚠':''}`,'sys'));msg(`[${agora()}] Pronto. Toque no núcleo ou digite um comando.`,'sys')});
