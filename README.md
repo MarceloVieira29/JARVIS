@@ -91,7 +91,7 @@ Lembretes e alertas só disparam com a aba aberta.
 
 ## Comando de voz
 
-Ao tocar em Ativar, o navegador pede o microfone (permita uma vez). Com "exigir a palavra-chave" ligado, comece com "Jarvis" — também valem "Jarbas" e outras variações em `palavrasChave`. O status mostra o que está sendo ouvido; se a frase vier sem a palavra-chave, ele avisa em vez de ignorar calado.
+Se o microfone já estiver liberado, a escuta começa ao abrir a página. Na primeira visita, qualquer toque ou tecla pede a permissão e liga a voz. O núcleo continua ligando/desligando a escuta (com briefing ao ativar). Com "exigir a palavra-chave" ligado, comece com "Jarvis" — também valem "Jarbas" e outras variações em `palavrasChave`. O status mostra o que está sendo ouvido; se a frase vier sem a palavra-chave, ele avisa em vez de ignorar calado.
 
 Nova skill: crie `web/js/skills/minha.js` exportando `{nome, casa(texto,ctx), rodar(texto,ctx)}` (opcional `iniciar(ctx)`), adicione `'minha'` em `skills` no config antes de `'ia'` e um caso em `tests/rotas.test.mjs`.
 

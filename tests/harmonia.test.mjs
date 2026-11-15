@@ -1,17 +1,33 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {EDICAO, SERVICOS, links, servicoDaFrase} from '../web/js/lib/harmonia.js';
-import harmonia, {temaDaFrase} from '../web/js/skills/harmonia.js';
+import harmonia, {temaDaFrase, casaHarmonia} from '../web/js/skills/harmonia.js';
 
 test('harmonia: frase escolhe o momento certo', () => {
   assert.equal(temaDaFrase('música para dormir'), 'noite');
   assert.equal(temaDaFrase('música 528 hz para relaxar'), 'relax');
   assert.equal(temaDaFrase('música para análise de bitcoin'), 'mercado');
+  assert.equal(temaDaFrase('trabalho e estudos'), 'estudo');
+  assert.equal(temaDaFrase('trabalho e estudo'), 'estudo');
   assert.equal(temaDaFrase('trilha sonora para foco nos estudos'), 'estudo');
   assert.equal(temaDaFrase('música de fé'), 'fe');
   assert.equal(temaDaFrase('músicas de adoração'), 'fe');
   assert.equal(temaDaFrase('música feliz'), null);
   assert.equal(temaDaFrase('playlist da semana'), null);
+});
+
+test('harmonia: casa com o nome do momento, sem dizer música', () => {
+  assert.equal(casaHarmonia('trabalho e estudos'), true);
+  assert.equal(casaHarmonia('trabalho e estudo'), true);
+  assert.equal(casaHarmonia('harmonia trabalho'), true);
+  assert.equal(casaHarmonia('harmonia trabalho e estudo'), true);
+  assert.equal(casaHarmonia('harmonia trabalho e estudos'), true);
+  assert.equal(casaHarmonia('mercado financeiro'), true);
+  assert.equal(casaHarmonia('fé, oração e adoração'), true);
+  assert.equal(casaHarmonia('relaxamento'), true);
+  assert.equal(casaHarmonia('como está o bitcoin'), false);
+  assert.equal(temaDaFrase('harmonia trabalho'), 'estudo');
+  assert.equal(temaDaFrase('harmonia trabalho e estudo'), 'estudo');
 });
 
 test('harmonia: edição tem ids únicos e toda faixa abre nos três serviços', () => {
@@ -49,16 +65,16 @@ test('harmonia: serviço citado na frase vira o preferido', () => {
   assert.match(r, /Abri a lista para você ouvir no Deezer\.$/);
 });
 
-test('harmonia: fala as faixas do momento e pede para abrir a lista', () => {
+test('harmonia: fala as faixas do momento e pede para escolher o serviço na tela', () => {
   const abertos = [];
-  const r = harmonia.rodar('música para dormir', {mostrar: (tela, id) => abertos.push([tela, id])});
-  assert.deepEqual(abertos, [['harmonia', 'noite']]);
-  assert.match(r, /^Noite — desacelerar e dormir: Dream 3 \(in the midst of my life\), de Max Richter; /);
-  assert.match(r, /Abri a lista para você ouvir\.$/);
+  const r = harmonia.rodar('trabalho e estudos', {mostrar: (tela, id) => abertos.push([tela, id])});
+  assert.deepEqual(abertos, [['harmonia', 'estudo']]);
+  assert.match(r, /^Trabalho e estudos — concentração: Cello Suite No\. 1/);
+  assert.match(r, /Abri a playlist\. Escolha Spotify, YouTube ou Deezer para ouvir\.$/);
 });
 
 test('harmonia: sem tema, apresenta os momentos; sem tela, não promete abrir', () => {
   const r = harmonia.rodar('playlist da semana', {});
   assert.match(r, /edição 2\. Momentos: fé, oração e adoração; trabalho e estudos; mercado financeiro; relaxamento; noite\./);
-  assert.doesNotMatch(r, /Abri a lista/);
+  assert.doesNotMatch(r, /Abri a playlist/);
 });
