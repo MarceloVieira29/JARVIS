@@ -15,6 +15,7 @@ secoes:[
 {musica:'Ousado Amor',artista:'Isaías Saad',youtube:'https://www.youtube.com/watch?v=wSKKEAnLTDw'},
 {musica:'É Tudo Sobre Você / Ser Mudado',artista:'MORADA',busca:'MORADA É Tudo Sobre Você Ser Mudado'}]},
 {id:'estudo',titulo:'Trabalho e estudos — concentração',momento:'Momento: durante os estudos, a leitura e o desenvolvimento dos seus projetos.',faixas:[
+{musica:'Efeito Mozart para Foco Profundo',artista:'Mozart — estude sem esforço',youtube:'https://www.youtube.com/watch?v=NsZRjl9Em2g',busca:'Efeito Mozart para Foco Profundo'},
 {musica:'Cello Suite No. 1 — Prélude',artista:'Bach / Yo-Yo Ma',busca:'Bach Cello Suite No. 1 Prelude Yo-Yo Ma',spotify:'https://open.spotify.com/track/1WbfAfJrkvIPOBDi9h7Yo7'},
 {musica:'Gnossienne No. 1',artista:'Erik Satie',spotify:'https://open.spotify.com/track/0LZNQF8LymynItVKYhGIDR'},
 {musica:'Metamorphosis One',artista:'Philip Glass',spotify:'https://open.spotify.com/track/4G3iDZriNHuEZuS8704XGh'},

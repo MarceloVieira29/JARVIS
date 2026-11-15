@@ -69,7 +69,7 @@ test('harmonia: fala as faixas do momento e pede para escolher o serviço na tel
   const abertos = [];
   const r = harmonia.rodar('trabalho e estudos', {mostrar: (tela, id) => abertos.push([tela, id])});
   assert.deepEqual(abertos, [['harmonia', 'estudo']]);
-  assert.match(r, /^Trabalho e estudos — concentração: Cello Suite No\. 1/);
+  assert.match(r, /^Trabalho e estudos — concentração: Efeito Mozart para Foco Profundo/);
   assert.match(r, /Abri a playlist\. Escolha Spotify, YouTube ou Deezer para ouvir\.$/);
 });
 
