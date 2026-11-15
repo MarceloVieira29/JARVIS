@@ -2,7 +2,7 @@
 
 Assistente de voz em português que roda no navegador. Cada habilidade é um arquivo; o que está ligado fica em `web/js/config.js`. Respostas livres passam por um Cloudflare Worker, o único lugar onde a chave da IA existe.
 
-Publicado em https://marcelovieira29.github.io/JARVIS/
+Publicado em https://marcelovieira29.github.io/JARVIS/ (o app fica em `/web/`; a raiz redireciona).
 
 ## Estrutura
 
